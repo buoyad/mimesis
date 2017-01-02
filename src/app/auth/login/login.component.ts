@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from '../signup/signup.component';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -10,8 +11,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public name: string;
-  public email: string;
+  public userId: string;
   public password: string;
 
   constructor(
@@ -21,8 +21,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public signup(): void {
-    this.as.signup(this.name, this.email, this.password);
+  public login(): void {
+    this.as.login(this.userId, this.password).then(f => {
+      console.log(f.auth);
+    });
   }
 
 }

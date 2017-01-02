@@ -1,13 +1,8 @@
-<table>
-  <tr>
-    <th> <h3>Login</h3> </th>
-    <th> <h3>Signup</h3> </th>
-  </tr>
-  <tr>
-    <td>
-</table>
+<div id="login">
+<h3> Login </h3>
 
-<input [(ngModel)]="name" type="text" placeholder="username"/><br/>
-<input [(ngModel)]="email" type="email" placeholder="email"/><br/>
+<input [(ngModel)]="userId" type="text" placeholder="username"/><br/>
 <input [(ngModel)]="password" type="password" placeholder="password"/><br/>
-<button type="button" (click)="signup()">Sign up</button>
+<button (click)="login()" type="button">Log in</button>
+</div>
+

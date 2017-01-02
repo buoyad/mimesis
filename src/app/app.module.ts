@@ -11,13 +11,14 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 // APP IMPORTS
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/login/signup/signup.component';
+import { SignupComponent } from './auth/signup/signup.component';
 import { AuthService } from './auth/auth.service';
+import { AuthComponent } from './auth/auth.component';
 
 
 // ==== ROUTER CONFIG ==== //
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: AuthComponent }
 ];
 // ======================= //
 
@@ -39,7 +40,8 @@ export const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

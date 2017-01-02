@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { AngularFire, 
           FirebaseAuthState, 
-          FirebaseListObservable } from 'angularfire2';
+          FirebaseListObservable,
+        } from 'angularfire2';
 
 @Injectable()
 export class AuthService {
@@ -29,6 +30,7 @@ export class AuthService {
         this.af.auth.createUser({email: email, password: password})
           .then(f => {
             resolve(f);
+            this.sendEmail(f);
             this.generateRecord(username, email);
           })
           .catch(e => reject(e));
@@ -43,6 +45,10 @@ export class AuthService {
       email: email
     };
     rec.set(record);
+  }
+
+  private sendEmail(user: FirebaseAuthState) {
+    user.auth.sendEmailVerification();
   }
 
   private userExists(username: string): Promise<boolean> {
