@@ -13,12 +13,28 @@ export class AuthService {
     this.users = af.database.list('/users');
    }
 
-  public login(email: string, password: string): Promise<FirebaseAuthState> {
-    return new Promise<FirebaseAuthState>((resolve, reject) => {
-      this.af.auth.login({email: email, password: password}).then(f => resolve(f))
-        .then(f => resolve(f))
-        .catch(e => reject(e));
-    });
+  public login(userId: string, password: string): Promise<FirebaseAuthState> {
+    if (userId.indexOf('@') != -1) {
+      return new Promise<FirebaseAuthState>((resolve, reject) => {
+        this.af.auth.login({email: userId, password: password}).then(f => resolve(f))
+          .then(f => resolve(f))
+          .catch(e => reject(e));
+      });
+    } else {
+      return new Promise<FirebaseAuthState>((resolve, reject) => {
+        this.af.database.object(`users/${userId}`).subscribe(u => {
+          console.log(u);
+          if (u != null) {            
+          this.af.auth.login({email: u.email, password: password}).then(f => resolve(f))
+            .then(f => resolve(f))
+            .catch(e => reject(e));
+          }
+          else {
+            reject(new Error('Username does not exist.'));
+          }
+        });
+      });
+    }
   }
 
   public signup(username: string, email: string, password: string): Promise<FirebaseAuthState> {
@@ -39,16 +55,20 @@ export class AuthService {
     });
   }
 
-  public getUserName(email: string): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
+  public getUserData(email: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       const db = this.af.database.list('/users', {
         query: {
           orderByChild: 'email',
           equalTo: email
         }
       });
-      db.subscribe(u => {
-        resolve(u[0].$key);
+      let sub = db.subscribe(u => {
+        let user = u[0];
+        user.username = user.$key;
+        delete user.$key;
+        resolve(user);
+        sub.unsubscribe();
       });
     });
   }

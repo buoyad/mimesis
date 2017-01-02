@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
     this.af.auth.subscribe(a => {
       if (a != null) {
         let email = a.auth.email;
-        this.as.getUserName(email).then(n => {
-          this.signedInAs = `Signed in as ${n}`;
+        this.as.getUserData(email).then(n => {
+          this.signedInAs = `Signed in as ${n.username}`;
         })
       } else {
         this.signedInAs = "Not currently signed in";
