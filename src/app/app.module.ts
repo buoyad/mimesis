@@ -14,11 +14,15 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthService } from './auth/auth.service';
 import { AuthComponent } from './auth/auth.component';
+import { PoolComponent } from './pools/pool/pool.component';
+import { PoolCreatorComponent } from './pools/pool-creator/pool-creator.component';
 
 
 // ==== ROUTER CONFIG ==== //
 const appRoutes: Routes = [
-  { path: 'login', component: AuthComponent }
+  { path: 'login', component: AuthComponent },
+  { path: 'create', component: PoolCreatorComponent },
+  { path: 'pool/:id', component: PoolComponent }
 ];
 // ======================= //
 
@@ -41,7 +45,9 @@ export const firebaseAuthConfig = {
     AppComponent,
     LoginComponent,
     SignupComponent,
-    AuthComponent
+    AuthComponent,
+    PoolComponent,
+    PoolCreatorComponent
   ],
   imports: [
     BrowserModule,

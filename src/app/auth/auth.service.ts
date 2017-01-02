@@ -48,7 +48,11 @@ export class AuthService {
   }
 
   private sendEmail(user: FirebaseAuthState) {
-    user.auth.sendEmailVerification();
+    this.af.auth.getAuth().auth.sendEmailVerification().then(a => {
+      console.log(a);
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
   private userExists(username: string): Promise<boolean> {
