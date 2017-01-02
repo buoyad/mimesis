@@ -39,6 +39,20 @@ export class AuthService {
     });
   }
 
+  public getUserName(email: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const db = this.af.database.list('/users', {
+        query: {
+          orderByChild: 'email',
+          equalTo: email
+        }
+      });
+      db.subscribe(u => {
+        resolve(u[0].$key);
+      });
+    });
+  }
+
   private generateRecord(username: string, email: string) {
     const rec = this.af.database.object(`/users/${username}`);
     let record: any = {
