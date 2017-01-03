@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
 import { AngularFire, 
           FirebaseAuthState, 
           FirebaseListObservable,
@@ -11,7 +13,7 @@ export class AuthService {
 
   constructor(private af: AngularFire) {
     this.users = af.database.list('/users');
-   }
+  }
 
   public login(userId: string, password: string): Promise<FirebaseAuthState> {
     if (userId.indexOf('@') != -1) {
@@ -70,6 +72,16 @@ export class AuthService {
         resolve(user);
         sub.unsubscribe();
       });
+    });
+  }
+
+  public getSignedInUser(): Observable<any> {
+    return new Observable<any>((o) => {
+      this.af.auth.subscribe(f => {
+        this.getUserData(f.auth.email).then(val => {
+          o.next(val);
+        })
+      })
     });
   }
 

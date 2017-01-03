@@ -16,6 +16,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthComponent } from './auth/auth.component';
 import { PoolComponent } from './pools/pool/pool.component';
 import { PoolCreatorComponent } from './pools/pool-creator/pool-creator.component';
+import { PoolService } from './pools/pool.service';
 
 
 // ==== ROUTER CONFIG ==== //
@@ -57,7 +58,8 @@ export const firebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   providers: [
-    AuthService
+    AuthService,
+    PoolService
   ],
   bootstrap: [AppComponent]
 })

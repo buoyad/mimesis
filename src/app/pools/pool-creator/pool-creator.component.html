@@ -1,3 +1,26 @@
-<p>
-  pool-creator works!
-</p>
+<h2>Create a new Pool!</h2>
+
+<form (ngSubmit)="onSubmit()" #poolForm="ngForm">
+<input type="text" 
+        [(ngModel)]="pool.name"
+        name="name" 
+        placeholder="Name your pool" 
+        required/><br/>
+
+<h3>Book Info</h3>
+<input type="text" placeholder="Title" [(ngModel)]="pool.book.title" name="title" required/>*<br/>
+<input type="text" placeholder="Author" [(ngModel)]="pool.book.author" name="author"/><br/>
+<input type="number" placeholder="# of pages" [(ngModel)]="pool.book.pages" name="pages" required/>*<br/>
+
+<h3>Schedule</h3>
+<table>
+  <tr><td><button type="button" (click)="addStone()">+</button></td><td></td></tr>
+  <tr *ngFor="let stone of pool.schedule.stones">
+    <td><input type="date" placeholder="Date" [(ngModel)]="stone.date" name="date{{$index}}" required/></td>
+    <td><input type="number" placeholder="Target page" [(ngModel)]="stone.page" name="page{{$index}}" required/></td>
+  </tr>
+</table>
+<button type="submit" [disabled]="!poolForm.form.valid">Submit</button>
+</form>
+  
+
