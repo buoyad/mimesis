@@ -33,12 +33,26 @@ export class Schedule {
 
 export class Stone {
   public page: number;
-  public date: Date;
+  private _date: Date;
 
   public threads: Thread[];
 
+  set date(d: string) {
+    console.log(d);
+    let tokens = d.split('-');
+    this._date.setFullYear(Number(tokens[0]));
+    this._date.setMonth(Number(tokens[1]));
+    this._date.setDate(Number(tokens[2]));
+  }
+
+  get date(): string {
+    let res = this._date.toISOString().substr(0, 10);
+    return res;
+  }
+
   constructor() {
     this.threads = new Array<Thread>();
+    this._date = new Date();
   }
 }
 

@@ -1,8 +1,11 @@
 <div id="signup">
 <h3>Sign up</h3>
 
-<input [(ngModel)]="username" type="text" placeholder="username"/><br/>
-<input [(ngModel)]="email" type="email" placeholder="email"/><br/>
-<input [(ngModel)]="password" type="password" placeholder="password"/><br/>
-<button type="button" (click)="signup()">Sign up</button>
+<form (ngSubmit)="signup()" #signupForm="ngForm">
+<input [(ngModel)]="username" name="username" type="text" placeholder="username"/><br/>
+<input [(ngModel)]="email" name="email" type="email" placeholder="email"/><br/>
+<input [(ngModel)]="password" name="password" type="password" placeholder="password"/><br/>
+<button type="submit">Sign up</button>
+</form>
+
 </div>
