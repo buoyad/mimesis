@@ -37,12 +37,11 @@ export class Stone {
 
   public threads: Thread[];
 
-  set date(d: string) {
-    console.log(d);
-    let tokens = d.split('-');
-    this._date.setFullYear(Number(tokens[0]));
-    this._date.setMonth(Number(tokens[1]));
-    this._date.setDate(Number(tokens[2]));
+  set date(j: string) {
+    let e = j.split('-');
+    let d = new Date(Date.UTC(Number(e[0]), Number(e[1])-1, Number(e[2])));
+    this._date = d;
+    //this._date.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
   }
 
   get date(): string {

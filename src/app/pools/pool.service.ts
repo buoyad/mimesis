@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 
+import { AngularFire } from 'angularfire2';
+
 @Injectable()
 export class PoolService {
 
-  constructor() { }
+  constructor(
+    private af: AngularFire
+  ) { }
 
 }

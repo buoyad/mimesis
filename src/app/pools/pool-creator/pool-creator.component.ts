@@ -25,9 +25,12 @@ export class PoolCreatorComponent implements OnInit {
     });
   }
 
-  public addStone(): void {
+  private addStone(): void {
     this.pool.schedule.stones.push(new Stone());
-    console.log(this.pool);
+  }
+
+  private onSubmit(): void {
+
   }
 
 }
