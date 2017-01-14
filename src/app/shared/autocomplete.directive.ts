@@ -42,6 +42,9 @@ export class AutocompleteDirective implements OnInit {
     this._data = this.config.data;
     this._asyncData = this.config.asyncData;
     this.vc.createEmbeddedView(this.tr);
+    this.term = this.tr.elementRef.nativeElement.nextSibling;
+    console.log(this.term);
+    this.term.addEventListener('keyup', ($event) => this.queryStream.next(this.term.value))
 
     this.registerHandlers();
   }
@@ -89,6 +92,7 @@ export class AutocompleteDirective implements OnInit {
   }
 
   private useResults(res: string[]) {
+    console.log(res);
     if (res.length == 1) {
       this.term.value = res[0];
       console.log("1 found: " + this.term.value);
