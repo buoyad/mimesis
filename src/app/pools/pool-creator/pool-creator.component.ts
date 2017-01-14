@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { PoolService } from '../pool.service';
 import { Pool, Stone, Schedule, Book } from '../pool';
+import { AutocompleteDirective } from '../../shared/autocomplete.directive'
 
 @Component({
   selector: 'app-pool-creator',
@@ -12,6 +13,7 @@ import { Pool, Stone, Schedule, Book } from '../pool';
 export class PoolCreatorComponent implements OnInit {
   private owner: any = {};
   private pool: Pool = new Pool();
+  private usernames;
 
   constructor(
     private as: AuthService,
@@ -23,6 +25,7 @@ export class PoolCreatorComponent implements OnInit {
       this.owner = u;
       this.pool.admins.push(this.owner.username);
     });
+    this.usernames = this.as.getUsernames();
   }
 
   private addStone(): void {

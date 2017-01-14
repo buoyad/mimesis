@@ -17,6 +17,7 @@ import { AuthComponent } from './auth/auth.component';
 import { PoolComponent } from './pools/pool/pool.component';
 import { PoolCreatorComponent } from './pools/pool-creator/pool-creator.component';
 import { PoolService } from './pools/pool.service';
+import { AutocompleteDirective } from './shared/autocomplete.directive';
 
 
 // ==== ROUTER CONFIG ==== //
@@ -48,7 +49,8 @@ export const firebaseAuthConfig = {
     SignupComponent,
     AuthComponent,
     PoolComponent,
-    PoolCreatorComponent
+    PoolCreatorComponent,
+    AutocompleteDirective
   ],
   imports: [
     BrowserModule,

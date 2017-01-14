@@ -85,12 +85,23 @@ export class AuthService {
     });
   }
 
+  public getUsernames(): Observable<string[]> {
+    return new Observable<string[]>(o => {
+      this.af.database.list('/names').subscribe(val => {
+        o.next(val.map(v => v.$value));
+        o.complete();
+      })
+    })
+  }
+
   private generateRecord(username: string, email: string) {
     const rec = this.af.database.object(`/users/${username}`);
     let record: any = {
       email: email
     };
     rec.set(record);
+    this.af.database.list('/emails').push(email);
+    this.af.database.list('/names').push(username)
   }
 
   private sendEmail(user: FirebaseAuthState) {
