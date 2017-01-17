@@ -33,7 +33,6 @@ export class PoolComponent implements OnInit {
     });
     this.as.getSignedInUser().subscribe(data => {
       this.signedIn = data;
-      console.log(this.signedIn);
     });
   }
 

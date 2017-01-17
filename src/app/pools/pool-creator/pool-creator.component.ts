@@ -27,6 +27,7 @@ export class PoolCreatorComponent implements OnInit {
     this.as.getSignedInUser().subscribe(u => {
       this.owner = u;
       this.pool.admins.push(this.owner.username);
+      this.pool.addMember(this.owner.username);
     });
     this.usernames = this.as.getUsernames();
   }
