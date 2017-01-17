@@ -27,8 +27,8 @@ export class Book {
 }
 
 export class Schedule {
-  public startDate: Date;
-  public endDate: Date;
+  public startDate: string;
+  public endDate: string;
 
   public stones: Stone[];
 
@@ -39,25 +39,13 @@ export class Schedule {
 
 export class Stone {
   public page: number;
-  private _date: Date;
+  public date: string = new Date().toISOString().substr(0, 10);
+  public heading: string = "";
 
   public threads: Thread[];
 
-  set date(j: string) {
-    let e = j.split('-');
-    let d = new Date(Date.UTC(Number(e[0]), Number(e[1])-1, Number(e[2])));
-    this._date = d;
-    //this._date.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-  }
-
-  get date(): string {
-    let res = this._date.toISOString().substr(0, 10);
-    return res;
-  }
-
   constructor() {
     this.threads = new Array<Thread>();
-    this._date = new Date();
   }
 }
 

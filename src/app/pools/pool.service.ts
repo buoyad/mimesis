@@ -32,4 +32,15 @@ export class PoolService {
     })
   }
 
+  public deletePool(key: string): void {
+    const pool = this.af.database.object(`/pools/${key}`);
+    let sub = pool.first().subscribe(data => {
+      if (data.$exists()) {
+        data.members.forEach(m => this.as.removeJoined(m, key));
+        data.admins.forEach(m => this.as.removeOwned(m, key));
+        pool.set(null);
+      }
+    });
+  }
+
 }

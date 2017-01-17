@@ -38,7 +38,6 @@ export class PoolCreatorComponent implements OnInit {
   private addUser(e: any) {
     if (e.keyCode === 13) {
       this.as.userExists(this.user).then(r => {
-        console.log(r);
         if (r) {
           this.pool.addMember(this.user);
         }

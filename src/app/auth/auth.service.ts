@@ -25,7 +25,6 @@ export class AuthService {
     } else {
       return new Promise<FirebaseAuthState>((resolve, reject) => {
         this.af.database.object(`users/${userId}`).subscribe(u => {
-          console.log(u);
           if (u != null) {            
           this.af.auth.login({email: u.email, password: password}).then(f => resolve(f))
             .then(f => resolve(f))
@@ -65,12 +64,11 @@ export class AuthService {
           equalTo: email
         }
       });
-      let sub = db.subscribe(u => {
+      let sub = db.first().subscribe(u => {
         let user = u[0];
         user.username = user.$key;
         delete user.$key;
         resolve(user);
-        sub.unsubscribe();
       });
     });
   }
@@ -99,9 +97,39 @@ export class AuthService {
     owned.push(key);
   }
 
+  public removeOwned(user: string, key: string): void {
+    const owned = this.af.database.list(`/users/${user}/owned`, {
+      query: {
+        orderByValue: true,
+        equalTo: key
+      }
+    });
+    let sub = owned.subscribe(data => {
+      if (data[0]) {
+        const pkey = data[0].$key;
+        this.af.database.object(`/users/${user}/owned/${pkey}`).set(null);
+      }
+    });
+  }
+
   public addJoined(user: string, key: string): void {
     const joined = this.af.database.list(`/users/${user}/joined`);
     joined.push(key);
+  }
+
+  public removeJoined(user: string, key: string): void {
+    const joined = this.af.database.list(`/users/${user}/joined`, {
+      query: {
+        orderByValue: true,
+        equalTo: key
+      }
+    });
+    let sub = joined.subscribe(data => {
+      if (data[0]) {
+        const pkey = data[0].$key;
+        this.af.database.object(`/users/${user}/joined/${pkey}`).set(null);
+      }
+    });
   }
 
   public getOwned(user: string): Observable<string[]> {

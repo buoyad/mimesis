@@ -25,9 +25,10 @@
 
 <h3>Schedule</h3>
 <table>
-  <tr><td><button type="button" (click)="addStone()">+</button></td><td></td></tr>
+  <tr><td><button type="button" (click)="addStone()">+</button></td><td></td><td></td></tr>
   <tr *ngFor="let stone of pool.schedule.stones; let i = index">
-    <td><input type="date" placeholder="Date" [(ngModel)]="pool.schedule.stones[i].date" name="date{{index}}" required/></td>
+    <td><input type="text" placeholder="Heading" [(ngModel)]="pool.schedule.stones[i].heading" required/></td>
+    <td><input type="date" [(ngModel)]="pool.schedule.stones[i].date" name="date{{i}}" required/></td>
     <td><input type="number" placeholder="Target page" [(ngModel)]="pool.schedule.stones[i].page" name="page{{i}}" required/></td>
   </tr>
 </table>

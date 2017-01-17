@@ -11,3 +11,6 @@
 <p>
   {{ id }}
 </p>
+
+<p *ngIf="signedIn && pool.admins.indexOf(signedIn.username) != -1"
+    (click)="delete()">[Delete this pool]</p>
