@@ -37,13 +37,10 @@ export class AutocompleteDirective implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.config)
-    this.term = this.config.term;
     this._data = this.config.data;
     this._asyncData = this.config.asyncData;
     this.vc.createEmbeddedView(this.tr);
     this.term = this.tr.elementRef.nativeElement.nextSibling;
-    console.log(this.term);
     this.term.addEventListener('keyup', ($event) => this.queryStream.next(this.term.value))
 
     this.registerHandlers();

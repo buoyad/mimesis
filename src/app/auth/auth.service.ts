@@ -94,6 +94,34 @@ export class AuthService {
     })
   }
 
+  public addOwned(user: string, key: string): void {
+    const owned = this.af.database.list(`/users/${user}/owned`);
+    owned.push(key);
+  }
+
+  public addJoined(user: string, key: string): void {
+    const joined = this.af.database.list(`/users/${user}/joined`);
+    joined.push(key);
+  }
+
+  public getOwned(user: string): Observable<string[]> {
+    return new Observable<string[]>(o => {
+      const owned = this.af.database.list(`/users/${user}/owned`);
+      owned.subscribe((data) => {
+        o.next(data.map(d => d.$value));
+      })
+    })
+  }
+
+  public getJoined(user: string): Observable<string[]> {
+    return new Observable<string[]>(o => {
+      const owned = this.af.database.list(`/users/${user}/joined`);
+      owned.subscribe((data) => {
+        o.next(data.map(d => d.$value));
+      })
+    })
+  }
+
   private generateRecord(username: string, email: string) {
     const rec = this.af.database.object(`/users/${username}`);
     let record: any = {
@@ -112,11 +140,11 @@ export class AuthService {
     });
   }
 
-  private userExists(username: string): Promise<boolean> {
+  public userExists(username: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const check = this.af.database.object(`/users/${username}`);
       check.subscribe(data => {
-        if (data.$value != null) {
+        if (data.$exists()) {
           resolve(true);
         } else {
           resolve(false);

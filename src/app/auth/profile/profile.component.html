@@ -1,0 +1,17 @@
+<h2>{{ username }}</h2>
+<div class="owned">
+  <p>Pools {{ username }} administrates:</p>
+  <ul>
+    <li *ngFor="let pool of owned">
+      <a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a>
+    </li>
+  </ul>
+</div>
+<div class="joined">
+  <p>Pools {{ username }} is a member of:</p>
+  <ul>
+    <li *ngFor="let pool of joined">
+      <a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a>
+    </li>
+  </ul>
+</div>

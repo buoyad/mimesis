@@ -7,12 +7,16 @@
         placeholder="Name your pool" 
         required/>*<br/>
 <input type="text"
-        #user
         placeholder="Add users"
         *autocompleteConfig="{
-          term: user,
           asyncData: usernames
-        }"/>
+        }"
+        (keyup)="addUser($event)"
+        [(ngModel)]="user"
+        name="user"/><br/>
+<ul>
+  <li *ngFor="let m of pool.members">{{m}}</li>
+</ul>
 
 <h3>Book Info</h3>
 <input type="text" placeholder="Title" [(ngModel)]="pool.book.title" name="title" required/>*<br/>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AngularFire } from 'angularfire2';
 
@@ -11,7 +12,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Mimesis';
-  private signedInAs: string;
+  private username: string;
 
   constructor(
     private as: AuthService,
@@ -23,10 +24,8 @@ export class AppComponent implements OnInit {
       if (a != null) {
         let email = a.auth.email;
         this.as.getUserData(email).then(n => {
-          this.signedInAs = `Signed in as ${n.username}`;
+          this.username = n.username;
         })
-      } else {
-        this.signedInAs = "Not currently signed in";
       }
     })
   }

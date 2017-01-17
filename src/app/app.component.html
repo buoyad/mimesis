@@ -1,8 +1,11 @@
 <h1>
   {{title}}
 </h1> 
-
-{{ signedInAs }} <hr/>
+<a [routerLink]="['/']">Home</a>  <a [routerLink]="['/create']">Create</a>
+<br/>
+<template [ngIf]="username">Signed in as <a [routerLink]="[username]">{{ username }}</a></template>
+<template [ngIf]="!username">Not currently signed in</template>
+<hr/>
 
 
 <router-outlet></router-outlet>

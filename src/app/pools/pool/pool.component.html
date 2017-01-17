@@ -1,3 +1,13 @@
+<main *ngIf="pool">
+  <h2>{{ pool.name }}</h2>
+  <p>Reading <em>{{ pool.book.title }}</em>
+  <template [ngIf]="pool.book.author"> by <strong>{{ pool.book.author }}</strong> </template>
+   with 
+    <span *ngFor="let m of pool.members; let last = last">
+      <a [routerLink]="['/', m]">{{ m }}</a> <template [ngIf]="!last">&amp;</template>
+    </span>
+</main>
+
 <p>
-  pool works!
+  {{ id }}
 </p>

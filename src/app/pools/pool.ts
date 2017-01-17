@@ -12,6 +12,12 @@ export class Pool {
     this.schedule = new Schedule();
     this.book = new Book();
   }
+
+  public addMember(u: string) {
+    if (this.members.indexOf(u) == -1) {
+      this.members.push(u);
+    }
+  }
 }
 
 export class Book {
