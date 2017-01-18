@@ -38,6 +38,13 @@ export class AuthService {
     }
   }
 
+  public logout(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.af.auth.logout()
+      resolve();
+    })
+  }
+
   public signup(username: string, email: string, password: string): Promise<FirebaseAuthState> {
     return new Promise<FirebaseAuthState>((resolve, reject) => {
       this.userExists(username).then(exists => {
@@ -76,9 +83,13 @@ export class AuthService {
   public getSignedInUser(): Observable<any> {
     return new Observable<any>((o) => {
       this.af.auth.subscribe(f => {
-        this.getUserData(f.auth.email).then(val => {
-          o.next(val);
-        })
+        if (f) {
+          this.getUserData(f.auth.email).then(val => {
+            o.next(val);
+          })
+        } else {
+          o.next(null);
+        }
       })
     });
   }

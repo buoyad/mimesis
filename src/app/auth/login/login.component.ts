@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   public password: string;
 
   constructor(
-    private as: AuthService
+    private as: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,7 +24,17 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     this.as.login(this.userId, this.password).then(f => {
-      console.log(f.auth);
+      if (this.userId.indexOf('@') != -1) {
+        this.as.getUserData(this.userId).then(res => this.router.navigate(['/', res.username]));
+      } else {
+        this.router.navigate(['/', this.userId]);
+      }
+    }).catch(e => {
+      if (e.code) {
+        console.log('Invalid password');
+      } else {
+        console.log('Username not found');
+      }
     });
   }
 

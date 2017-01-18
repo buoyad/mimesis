@@ -1,0 +1,10 @@
+<main *ngIf="loaded && signedIn">
+  <h3>Welcome, {{ signedIn.username }}!</h3>
+  Head over to your <a [routerLink]="['/', signedIn.username]">profile</a> 
+  to access your pools.
+</main>
+
+<main *ngIf="loaded && !signedIn">
+  Welcome to Mimesis! <a [routerLink]="['/login']">Login</a> 
+  or <a [routerLink]="['/login']">signup</a> to get started.
+</main>

@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private as: AuthService,
-    private af: AngularFire
+    private af: AngularFire,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -26,7 +27,15 @@ export class AppComponent implements OnInit {
         this.as.getUserData(email).then(n => {
           this.username = n.username;
         })
+      } else {
+        this.username = null;
       }
+    })
+  }
+
+  logout() {
+    this.as.logout().then(() => {
+      this.router.navigate(['/']);
     })
   }
 }

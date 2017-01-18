@@ -3,8 +3,14 @@
 </h1> 
 <a [routerLink]="['/']">Home</a>  <a [routerLink]="['/create']">Create</a>
 <br/>
-<template [ngIf]="username">Signed in as <a [routerLink]="[username]">{{ username }}</a></template>
-<template [ngIf]="!username">Not currently signed in</template>
+<template [ngIf]="username">
+  Signed in as <a [routerLink]="[username]">{{ username }}</a>
+  <span (click)="logout()">[logout]</span>
+</template>
+<template [ngIf]="!username">
+  Not currently signed in
+  <span (click)="router.navigate(['/login'])">[login]</span>
+</template>
 <hr/>
 
 

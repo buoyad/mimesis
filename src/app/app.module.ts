@@ -19,6 +19,7 @@ import { PoolCreatorComponent } from './pools/pool-creator/pool-creator.componen
 import { PoolService } from './pools/pool.service';
 import { AutocompleteDirective } from './shared/autocomplete.directive';
 import { ProfileComponent } from './auth/profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 
 // ==== ROUTER CONFIG ==== //
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'create', component: PoolCreatorComponent },
   { path: 'pool/:id', component: PoolComponent },
-  { path: ':username', component: ProfileComponent }
+  { path: ':username', component: ProfileComponent },
+  { path: '', component: HomeComponent}
 ];
 // ======================= //
 
@@ -53,7 +55,8 @@ export const firebaseAuthConfig = {
     PoolComponent,
     PoolCreatorComponent,
     AutocompleteDirective,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
