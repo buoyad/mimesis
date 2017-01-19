@@ -42,24 +42,13 @@ export class Stone {
   public date: string = new Date().toISOString().substr(0, 10);
   public heading: string = "";
 
-  public threads: Thread[];
+  public threads: string;
 
-  constructor() {
-    this.threads = new Array<Thread>();
-  }
-}
-
-export class Thread {
-  public owner: string;
-  public msgs: Message[];
-
-  constructor() {
-    this.msgs = new Array<Message>();
-  }
+  constructor() { }
 }
 
 export class Message {
   public author: string = "";
   public content: string = "";
-  public timestamp: Date;
+  public timestamp: string;
 }

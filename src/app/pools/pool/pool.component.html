@@ -1,12 +1,19 @@
-<main *ngIf="pool">
+<aside *ngIf="pool">
   <h2>{{ pool.name }}</h2>
-  <p>Reading <em>{{ pool.book.title }}</em>
-  <template [ngIf]="pool.book.author"> by <strong>{{ pool.book.author }}</strong> </template>
+  <p>Reading <em>{{ pool.book.title }}</em><br/>
+  <template [ngIf]="pool.book.author"> by <strong>{{ pool.book.author }}</strong><br/> </template>
    with 
-    <span *ngFor="let m of pool.members; let last = last">
-      <a [routerLink]="['/', m]">{{ m }}</a> <template [ngIf]="!last">&amp;</template>
-    </span>
-</main>
-
+  <span *ngFor="let m of pool.members; let last = last">
+    <a [routerLink]="['/', m]">{{ m }}</a> <template [ngIf]="!last">&amp;</template>
+  </span>
+  <ul>
+    <li *ngFor="let stone of pool.schedule.stones; let i = index;">
+      <a [routerLink]="[i]">{{ stone.heading }}</a>
+    </li>
+  </ul>
+</aside>
+<main>
+<router-outlet></router-outlet>
+<main>
 <p *ngIf="signedIn && pool.admins.indexOf(signedIn.username) != -1"
     (click)="delete()">[Delete this pool]</p>

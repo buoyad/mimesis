@@ -1,0 +1,10 @@
+aside {
+  width: 200px;
+  float: left;
+  border-right: 1px dotted black;
+  height: 100%;
+}
+
+main {
+  float: left;
+}
