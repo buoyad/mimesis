@@ -1,3 +1,21 @@
 <p>
   thread works!
 </p>
+
+<div *ngIf="threads[0]">
+  <ol *ngFor="let thread of threads; let i = index;">
+    <li *ngFor="let message of threads[i]; let f = first">
+      {{ message.author }} said.. <br/>
+      {{ message.content }}
+    </li>
+    <li>
+      <textarea placeholder="Leave a reply" (keyup)="submitReply($event, i)"></textarea>
+    </li>
+    <hr/>
+  </ol>
+</div>
+
+<textarea [(ngModel)]="comment" 
+          (keyup)="createThread($event)"
+          placeholder="Create a new thread">
+</textarea>

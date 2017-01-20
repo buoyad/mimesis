@@ -61,4 +61,12 @@ export class PoolService {
     this.af.database.list(`/threads/${poolKey}/${stoneKey}/${threadKey}`).push(message);
   }
 
+  getThreads(poolKey: string, stoneKey: string): Observable<any> {
+    return new Observable<any>(o => {
+      this.af.database.list(`/threads/${poolKey}/${stoneKey}`).subscribe( res => {
+        o.next(res);
+      })
+    })
+  }
+
 }
