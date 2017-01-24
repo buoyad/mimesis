@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Pool } from '../pool';
+import { ThreadComponent } from '../thread/thread.component';
 import { PoolService } from '../pool.service';
 import { AuthService } from '../../auth/auth.service';
 
@@ -15,6 +16,8 @@ export class PoolComponent implements OnInit {
   private id: string;
   private pool: Pool;
   private signedIn: any;
+
+  @ViewChild(ThreadComponent) threadRef: ComponentRef<ThreadComponent>;
 
   constructor(
     private ar: ActivatedRoute,
@@ -39,6 +42,13 @@ export class PoolComponent implements OnInit {
   private delete() {
     this.router.navigate(['/']);
     this.ps.deletePool(this.id);
+  }
+
+  private initThread(stoneNo: number) {
+    if (this.threadRef) {
+      this.threadRef.destroy();
+    }
+    this.router.navigate([stoneNo], { relativeTo: this.ar });
   }
 
 }

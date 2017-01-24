@@ -8,7 +8,7 @@
   </span>
   <ul>
     <li *ngFor="let stone of pool.schedule.stones; let i = index;">
-      <a [routerLink]="[i]">{{ stone.heading }}</a>
+      <a (click)="initThread(i)">{{ stone.heading }}</a>
     </li>
   </ul>
 </aside>

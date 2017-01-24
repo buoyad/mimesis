@@ -46,9 +46,15 @@ export class PoolService {
       if (data.$exists()) {
         data.members.forEach(m => this.as.removeJoined(m, key));
         data.admins.forEach(m => this.as.removeOwned(m, key));
+        data.schedule.stones.forEach(stone => this.deleteThread(key, stone.threads));
         pool.set(null);
       }
     });
+  }
+
+  public deleteThread(poolKey: string, threadKey: string) {
+    const ref = this.af.database.object(`/threads/${poolKey}`);
+    ref.set(null);
   }
 
   public addThread(poolKey: string, stoneKey: string, message: Message): string {
