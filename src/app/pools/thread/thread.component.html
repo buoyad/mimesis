@@ -9,13 +9,16 @@
       {{ message.content }}
     </li>
     <li>
-      <textarea placeholder="Leave a reply" (keyup)="submitReply($event, i)"></textarea>
+      <textarea placeholder="Leave a reply" 
+                [(ngModel)]="replies[i]" 
+                (keydown)="submitReply($event, i)">
+      </textarea>
     </li>
     <hr/>
   </ol>
 </div>
 
 <textarea [(ngModel)]="comment" 
-          (keyup)="createThread($event)"
+          (keydown)="createThread($event)"
           placeholder="Create a new thread">
 </textarea>

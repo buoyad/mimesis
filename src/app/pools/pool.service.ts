@@ -22,7 +22,7 @@ export class PoolService {
     p.admins.forEach(u => this.as.addOwned(u, key));
     p.schedule.stones.forEach(stone => {
       const threads = this.af.database.list(`/threads/${key}`);
-      stone.threads = threads.push({heading: stone.heading}).key;
+      stone.threads = threads.push({ heading: stone.heading }).key;
     });
     const pool = this.af.database.object(`/pools/${key}`);
     pool.update(p);
@@ -67,9 +67,17 @@ export class PoolService {
     this.af.database.list(`/threads/${poolKey}/${stoneKey}/${threadKey}`).push(message);
   }
 
-  getThreads(poolKey: string, stoneKey: string): Observable<any> {
+  public getThreads(poolKey: string, stoneKey: string): Observable<any> {
     return new Observable<any>(o => {
-      this.af.database.list(`/threads/${poolKey}/${stoneKey}`).subscribe( res => {
+      this.af.database.list(`/threads/${poolKey}/${stoneKey}`).subscribe(res => {
+        res.forEach((t, i) => {
+          let key = t.$key;
+          res[i] = Object.keys(t)
+            .filter(p => (p.indexOf('$') === -1))
+            .map(val => t[val]);
+          res[i].$key = key;
+        });
+        res = res.filter(r => r.length > 0)
         o.next(res);
       })
     })

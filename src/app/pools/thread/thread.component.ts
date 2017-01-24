@@ -23,7 +23,8 @@ export class ThreadComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = new Array<Subscription>();
 
   private comment: string;
-  private threads: Message[][] = new Array<Array<Message>>();
+  private replies: string[] = new Array<string>();
+  private threads: any = new Array<Array<Message>>();
 
   constructor(
     private ar: ActivatedRoute,
@@ -33,28 +34,27 @@ export class ThreadComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('Initialized thread');
     this.subs.push(this.as.getSignedInUser().subscribe(u => {
       this.username = u.username;
     }))
-    Observable.zip(this.ar.parent.params, this.ps.selectedPool).subscribe(([parentParams, pool]) => {
+    this.ps.selectedPool.subscribe((pool) => {
+      console.log('retrieved pool', pool)
       this.subs.push(this.ar.params.subscribe(params => { // TODO: Implement route reload strategies to be able to discard this subscription
-        console.log('params changed')
+        console.log('params changed', params)
         this.stone, this.comment = null;
         this.sub.unsubscribe();
         this.threads = new Array<Array<Message>>();
-        console.log(params);
-        this.poolKey = parentParams['id'];
         this.pool = pool;
+        this.poolKey = pool.$key;
+        console.log(this.pool.$key);
         this.stone = pool.schedule.stones[params['stoneIndex']];
         this.sub = this.ps.getThreads(this.poolKey, this.stone.threads).subscribe(r => {
           console.log(r);
-          this.threads = r.forEach((t, i) => {
-            r[i] = Object.keys(t)
-              .filter(p => (p.indexOf('$') === -1))
-              .map(val => t[val]);
-          });
           this.threads = r;
-          console.log(this.threads);
+          let rep = new Array<string>(r.length);
+          this.replies.forEach((r, i) => rep[i] = r);
+          //console.log(this.threads);
         });
       }));
     })
@@ -65,17 +65,30 @@ export class ThreadComponent implements OnInit, OnDestroy {
   }
 
   private submitReply($event, i): void {
-
+    console.log(this.replies);
+    if ($event.keyCode === 13) {
+      $event.preventDefault();
+      let msg: Message = {
+        author: this.username,
+        timestamp: new Date().toISOString(),
+        content: this.replies[i]
+      }
+      this.replies[i] = "";
+      this.ps.addMessage(this.poolKey, this.stone.threads, this.threads[i].$key, msg);
+    }
   }
 
   private createThread($event): void {
     if ($event.keyCode === 13) {
+      $event.preventDefault();
       let msg: Message = {
         author: this.username,
         timestamp: new Date().toISOString(),
         content: this.comment
       };
-      console.log(this.ps.addThread(this.poolKey, this.stone.threads, msg));
+      this.comment = "";
+      this.replies.push("");
+      this.ps.addThread(this.poolKey, this.stone.threads, msg);
     }
   }
 

@@ -1,4 +1,5 @@
 export class Pool {
+  public $key?: string;
   public name: string = "";
   public admins: string[]; 
   public members: string[];
