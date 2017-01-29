@@ -21,15 +21,8 @@ export class AppComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.af.auth.subscribe(a => {
-      if (a != null) {
-        let email = a.auth.email;
-        this.as.getUserData(email).then(n => {
-          this.username = n.username;
-        })
-      } else {
-        this.username = null;
-      }
+    this.as.getSignedInUser().subscribe(user => {
+      this.username = user ? user.username : user;
     })
   }
 

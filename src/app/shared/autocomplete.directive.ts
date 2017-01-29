@@ -3,7 +3,7 @@ import {
   Output, OnInit,
   HostListener, TemplateRef,
   ViewContainerRef, EventEmitter,
-  Component
+  Component, ApplicationRef
 } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs/Rx';
@@ -33,7 +33,8 @@ export class AutocompleteDirective implements OnInit {
 
   constructor(
     private tr: TemplateRef<any>,
-    private vc: ViewContainerRef
+    private vc: ViewContainerRef,
+    private ar: ApplicationRef
   ) { }
 
   ngOnInit() {
@@ -75,15 +76,7 @@ export class AutocompleteDirective implements OnInit {
   private getResults(term: string): string[] {
     if (this._data) {
       return this._data.filter(q => {
-        return (q.indexOf(term) > -1);
-      })
-    }
-    else if (this._asyncData) {
-      this._asyncData.subscribe(value => {
-        var res: string[] = value.filter(q => {
-          return (q.indexOf(term) > -1);
-        });
-        return res;
+        return (q.toLowerCase().indexOf(term.toLowerCase()) == 0);
       })
     }
   }
@@ -92,6 +85,7 @@ export class AutocompleteDirective implements OnInit {
     console.log(res);
     if (res.length == 1) {
       this.term.value = res[0];
+      this.ar.tick();
       console.log("1 found: " + this.term.value);
     }
     this.results = res;

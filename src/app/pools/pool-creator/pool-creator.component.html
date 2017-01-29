@@ -11,7 +11,7 @@
         *autocompleteConfig="{
           asyncData: usernames
         }"
-        (keyup)="addUser($event)"
+        (keydown)="addUser($event)"
         [(ngModel)]="user"
         name="user"/><br/>
 <ul>

@@ -46,9 +46,9 @@ export class PoolComponent implements OnInit {
 
   private initThread(stoneNo: number) {
     this.ps.selectedPool.next(this.pool);
-    // if (this.threadRef) {
-    //   this.threadRef.destroy();
-    // }
+    if (this.threadRef) {
+      this.threadRef.destroy();
+    }
     // this.router.navigate([stoneNo], { relativeTo: this.ar });
   }
 

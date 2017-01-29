@@ -1,17 +1,26 @@
-<h1>
+<main>
+
+<div id="header">
+
+<div id="title" (click)="router.navigate(['/'])">
   {{title}}
-</h1> 
-<a [routerLink]="['/']">Home</a>  <a [routerLink]="['/create']">Create</a>
-<br/>
-<template [ngIf]="username">
-  Signed in as <a [routerLink]="[username]">{{ username }}</a>
-  <span (click)="logout()">[logout]</span>
-</template>
-<template [ngIf]="!username">
-  Not currently signed in
-  <span (click)="router.navigate(['/login'])">[login]</span>
-</template>
-<hr/>
+</div>
+
+<div class="username" *ngIf="username">
+  <a [routerLink]="[username]">{{ username }}</a>
+  <span class="logout" (click)="logout()">[x]</span>
+</div>
+<div div class="username" *ngIf="!username">
+  <a [routerLink]="['/login']">Login</a>
+</div> 
+
+<div class="nav">
+<a [routerLink]="['/create']">Create</a>
+</div>
+
+</div>
 
 
 <router-outlet></router-outlet>
+
+</main>

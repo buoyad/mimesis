@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router'
+
+import { Subscription } from 'rxjs/Rx';
 
 import { AuthService } from '../auth/auth.service';
 import { PoolService } from '../pools/pool.service';
@@ -9,9 +11,11 @@ import { PoolService } from '../pools/pool.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private loaded: boolean = false;
   private signedIn: any;
+
+  private sub: Subscription;
 
   constructor(
     private router: Router,
@@ -20,10 +24,15 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.as.getSignedInUser().subscribe(d => {
+    this.sub = this.as.getSignedInUser().subscribe(d => {
+      console.log(d);
       this.signedIn = d;
       this.loaded = true;
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

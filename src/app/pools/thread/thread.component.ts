@@ -38,6 +38,25 @@ export class ThreadComponent implements OnInit, OnDestroy {
     this.subs.push(this.as.getSignedInUser().subscribe(u => {
       this.username = u.username;
     }))
+
+    // this.ps.selectedPool.subscribe(pool => {
+    //   this.pool = pool;
+    //   this.poolKey = pool.$key;
+    // })
+
+    // this.ar.params.subscribe(params => {
+    //   this.stone, this.comment = null;
+    //   this.replies = new Array<string>();
+    //   this.threads = new Array<Array<Message>>();
+    //   while (!this.pool) { } // ratchet wait
+    //   this.stone = this.pool.schedule.stones[params['stoneIndex']];
+    //   this.sub = this.ps.getThreads(this.poolKey, this.stone.threads).subscribe(r => {
+    //     this.threads = r;
+    //     let rep = new Array<string>(r.length);
+    //     this.replies.forEach((r, i) => rep[i] = r);
+    //   });
+    // })
+
     this.ps.selectedPool.subscribe((pool) => {
       console.log('retrieved pool', pool)
       this.subs.push(this.ar.params.subscribe(params => { // TODO: Implement route reload strategies to be able to discard this subscription
@@ -47,14 +66,11 @@ export class ThreadComponent implements OnInit, OnDestroy {
         this.threads = new Array<Array<Message>>();
         this.pool = pool;
         this.poolKey = pool.$key;
-        console.log(this.pool.$key);
         this.stone = pool.schedule.stones[params['stoneIndex']];
         this.sub = this.ps.getThreads(this.poolKey, this.stone.threads).subscribe(r => {
-          console.log(r);
           this.threads = r;
           let rep = new Array<string>(r.length);
           this.replies.forEach((r, i) => rep[i] = r);
-          //console.log(this.threads);
         });
       }));
     })
