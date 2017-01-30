@@ -10,7 +10,7 @@ import { Pool, Stone, Message } from '../pool';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
-  styleUrls: ['./thread.component.css']
+  styleUrls: ['./thread.component.scss']
 })
 export class ThreadComponent implements OnInit, OnDestroy {
   private username: string;

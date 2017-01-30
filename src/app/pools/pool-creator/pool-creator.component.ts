@@ -9,7 +9,7 @@ import { AutocompleteDirective } from '../../shared/autocomplete.directive'
 @Component({
   selector: 'app-pool-creator',
   templateUrl: './pool-creator.component.html',
-  styleUrls: ['./pool-creator.component.css']
+  styleUrls: ['./pool-creator.component.scss']
 })
 export class PoolCreatorComponent implements OnInit {
   private owner: any = {};

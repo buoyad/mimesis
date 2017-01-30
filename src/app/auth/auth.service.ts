@@ -9,10 +9,21 @@ import { AngularFire,
 
 @Injectable()
 export class AuthService {
-  private signedInUser: FirebaseListObservable<any[]>;
+  private signedInUser: Observable<any>;
 
   constructor(private af: AngularFire) {
-    this.signedInUser = af.database.list('/users');
+    this.signedInUser = new Observable<any>((o) => {
+      this.af.auth.subscribe(f => {
+        console.log(f);
+        if (f) {
+          this.getUserData(f.auth.email).then(val => {
+            o.next(val);
+          })
+        } else {
+          o.next(null);
+        }
+      })
+    });
   }
 
   public login(userId: string, password: string): Promise<FirebaseAuthState> {
@@ -81,18 +92,7 @@ export class AuthService {
   }
 
   public getSignedInUser(): Observable<any> {
-    return new Observable<any>((o) => {
-      this.af.auth.subscribe(f => {
-        console.log(f);
-        if (f) {
-          this.getUserData(f.auth.email).then(val => {
-            o.next(val);
-          })
-        } else {
-          o.next(null);
-        }
-      })
-    });
+    return this.signedInUser;
   }
 
   public getUsernames(): Observable<string[]> {

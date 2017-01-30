@@ -10,7 +10,7 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-pool',
   templateUrl: './pool.component.html',
-  styleUrls: ['./pool.component.css']
+  styleUrls: ['./pool.component.scss']
 })
 export class PoolComponent implements OnInit {
   private id: string;

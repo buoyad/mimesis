@@ -8,10 +8,10 @@ import { AuthService } from './auth/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Mimesis';
+  title = 'MIMESIS';
   private username: string;
 
   constructor(
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.as.logout().then(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     })
   }
 }

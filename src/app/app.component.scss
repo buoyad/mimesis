@@ -1,0 +1,83 @@
+@import 'shared/colors';
+@import url('https://fonts.googleapis.com/css?family=Farsan|Merriweather|Open+Sans');
+
+$content-width: 100%;
+
+$font-title: 'Farsan', cursive;
+$font-heading: 'Merriweather', serif;
+$font-content: 'Open Sans', sans-serif;
+
+header, main {
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+main {
+  box-sizing: border-box;
+  height: calc(100vh - 61px);
+  background-color: $bg-light;
+  padding: 1px 5px;
+  color: $text-primary;
+
+  /deep/ h1, /deep/ h2, /deep/ h3, /deep/ h4, /deep/ h5, /deep/ h6 {
+    font-family: $font-heading;
+  }
+
+  /deep/ p {
+    font-family: $font-content;
+  }
+
+  /deep/ a, a:visited {
+    color: $text-secondary; 
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#header {
+  height: 60px;
+  background-color: $bg-dark;
+  color: $text-light;
+}
+
+#header-wrap {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#title {
+  float: left;
+  font-size: 36px;
+  line-height: 1em;
+  margin: 12px 0 12px 12px;
+  font-family: $font-title;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.username, .nav {
+  margin-right: 12px;
+  margin-top: 21px;
+  float: right;
+
+  font-size: 18px;
+  font-family: $font-heading;
+
+  a, a:visited {
+    text-decoration: none;
+    color: $text-light;
+  }
+}
+
+.logout {
+  font-size: 8px;
+  padding-bottom: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

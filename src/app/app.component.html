@@ -1,6 +1,8 @@
-<main>
+<header>
 
 <div id="header">
+
+<div id="header-wrap">
 
 <div id="title" (click)="router.navigate(['/'])">
   {{title}}
@@ -20,7 +22,10 @@
 
 </div>
 
+</div>
 
+</header>
+
+<main>
 <router-outlet></router-outlet>
-
 </main>

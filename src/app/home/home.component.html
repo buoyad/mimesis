@@ -1,10 +1,22 @@
-<main *ngIf="loaded && signedIn">
-  <h3>Welcome, {{ signedIn.username }}!</h3>
-  Head over to your <a [routerLink]="['/', signedIn.username]">profile</a> 
-  to access your pools.
-</main>
+<main *ngIf="loaded">
+  <template [ngIf]="signedIn">
+    <h3>
+      Welcome, {{ signedIn.username }}!
+    </h3>
 
-<main *ngIf="loaded && !signedIn">
-  Welcome to Mimesis! <a [routerLink]="['/login']">Login</a> 
-  or <a [routerLink]="['/login']">signup</a> to get started.
+    <p>
+      Head over to your <a [routerLink]="['/', signedIn.username]">profile</a> 
+      to access your pools.
+    </p>
+  </template>
+  <h3>Read together.</h3>
+
+  <p>Mimesis is a tool for books clubs (<em>pools</em>) to use 
+  for scheduling readings and organizing discussions. Mimesis
+  lets you coordinate a reading pool with anyone in the world,
+  and takes care of managing your schedules and notifying
+  you when a reading is due.</p>
+
+  <p *ngIf="!signedIn">So, welcome! <a [routerLink]="['/login']">Login or signup</a>
+  to get started.</p>
 </main>
