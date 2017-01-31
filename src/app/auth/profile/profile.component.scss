@@ -1,4 +1,15 @@
-.owned, .joined {
-  float: left;
-  margin-right: 100px;
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-right: 15%;
+}
+
+li {
+  margin-right: 50px;
+}
+
+h3 {
+  padding: 0 5%;
 }
