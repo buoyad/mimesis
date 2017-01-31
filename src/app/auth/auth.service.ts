@@ -14,7 +14,6 @@ export class AuthService {
   constructor(private af: AngularFire) {
     this.signedInUser = new Observable<any>((o) => {
       this.af.auth.subscribe(f => {
-        console.log(f);
         if (f) {
           this.getUserData(f.auth.email).then(val => {
             o.next(val);
@@ -147,7 +146,6 @@ export class AuthService {
     return new Observable<string[]>(o => {
       const owned = this.af.database.list(`/users/${user}/owned`);
       owned.subscribe((data) => {
-        // console.log(data);
         o.next(data.map(d => d.$value));
       })
     })
@@ -157,7 +155,6 @@ export class AuthService {
     return new Observable<string[]>(o => {
       const owned = this.af.database.list(`/users/${user}/joined`);
       owned.subscribe((data) => {
-      // console.log(data);
         o.next(data.map(d => d.$value));
       })
     })
