@@ -22,11 +22,14 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ThreadComponent } from './pools/thread/thread.component';
 import { SummaryComponent } from './pools/summary/summary.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/auth-guard.service';
+import { ProfileGuard } from './auth/profile/profile-guard.service';
 
 
 // ==== ROUTER CONFIG ==== //
 const appRoutes: Routes = [
-  { path: 'login', component: AuthComponent },
+  { path: 'login', component: AuthComponent, canActivate: [AuthGuard] },
   { path: 'create', component: PoolCreatorComponent },
   { 
     path: 'pool/:id', 
@@ -36,8 +39,10 @@ const appRoutes: Routes = [
       { path: ':stoneIndex', component: ThreadComponent }
     ]
   },
-  { path: ':username', component: ProfileComponent },
-  { path: '', component: HomeComponent}
+  { path: '', component: HomeComponent},
+  { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: ':username', component: ProfileComponent, canActivate: [ProfileGuard] },
+  { path: '**', component: PageNotFoundComponent }
 ];
 // ======================= //
 
@@ -67,7 +72,8 @@ export const firebaseAuthConfig = {
     ProfileComponent,
     HomeComponent,
     ThreadComponent,
-    SummaryComponent
+    SummaryComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +84,10 @@ export const firebaseAuthConfig = {
   ],
   providers: [
     AuthService,
-    PoolService
+    PoolService,
+
+    AuthGuard,
+    ProfileGuard
   ],
   bootstrap: [AppComponent]
 })
