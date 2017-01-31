@@ -147,6 +147,7 @@ export class AuthService {
     return new Observable<string[]>(o => {
       const owned = this.af.database.list(`/users/${user}/owned`);
       owned.subscribe((data) => {
+        // console.log(data);
         o.next(data.map(d => d.$value));
       })
     })
@@ -156,6 +157,7 @@ export class AuthService {
     return new Observable<string[]>(o => {
       const owned = this.af.database.list(`/users/${user}/joined`);
       owned.subscribe((data) => {
+      // console.log(data);
         o.next(data.map(d => d.$value));
       })
     })
