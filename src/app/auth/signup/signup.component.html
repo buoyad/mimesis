@@ -1,11 +1,17 @@
 <div id="signup">
 <h3>Sign up</h3>
 
-<form (ngSubmit)="signup()" #signupForm="ngForm">
-<input [(ngModel)]="username" name="username" type="text" placeholder="username"/><br/>
-<input [(ngModel)]="email" name="email" type="email" placeholder="email"/><br/>
-<input [(ngModel)]="password" name="password" type="password" placeholder="password"/><br/>
-<button type="submit">Sign up</button>
+<form class="ui mini form" [formGroup]="signupForm">
+  <div class="field">
+    <sm-input label="Username" name="username" [control]="signupForm.controls.username"></sm-input>
+  </div>
+  <div class="field">
+    <sm-input label="Email" type="email" name="email" [control]="signupForm.controls.email"></sm-input>
+  </div>
+  <div class="field">
+    <sm-input label="Password" name="password" [control]="signupForm.controls.password"></sm-input>
+  </div>  
+  <sm-button (click)="test()" icon="privacy" [disabled]="signupForm.invalid" class="positive">Submit</sm-button>
 </form>
 
 </div>
