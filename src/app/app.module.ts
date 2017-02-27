@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // LIBRARY IMPORTS
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { NgSemanticModule } from "ng-semantic/ng-semantic";
+import { NgSemanticModule } from "ng-semantic/ng-semantic.js";
 
 // APP IMPORTS
 import { AppComponent } from './app.component';
