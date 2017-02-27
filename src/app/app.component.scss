@@ -62,7 +62,7 @@ main {
   }
 }
 
-.username, .nav {
+.nav {
   margin-right: 12px;
   margin-top: 21px;
   float: right;
@@ -73,6 +73,10 @@ main {
   a, a:visited {
     text-decoration: none;
     color: $text-light;
+  }
+
+  /deep/ .navmenu {
+    margin-top: -0.7em;
   }
 }
 

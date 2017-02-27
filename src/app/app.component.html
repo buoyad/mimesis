@@ -1,31 +1,28 @@
 <header>
 
-<div id="header">
+  <div id="header">
 
-<div id="header-wrap">
+    <div id="header-wrap">
 
-<div id="title" (click)="router.navigate(['/'])">
-  {{title}}
-</div>
+      <div id="title" (click)="router.navigate(['/'])">
+        {{title}}
+      </div>
 
-<div class="username" *ngIf="username">
-  <a [routerLink]="[username]">{{ username }}</a>
-  <span class="logout" (click)="logout()">[x]</span>
-</div>
-<div div class="username" *ngIf="!username">
-  <a [routerLink]="['/login']">Login</a>
-</div> 
+      <div class="nav">
+        <sm-menu class="inverted secondary navmenu">
+          <a sm-item icon="wizard" (click)="router.navigate(['create'])">Create</a>
+          <a sm-item *ngIf="!username" icon="sign in" (click)="router.navigate(['login'])">Login</a>
+          <a sm-item *ngIf="username" icon="child" (click)="router.navigate([username])">{{username}}</a>
+          <a sm-item *ngIf="username" icon="remove" (click)="logout()">Logout</a>  
+        </sm-menu> 
+      </div>
 
-<div class="nav">
-<a [routerLink]="['/create']">Create</a>
-</div>
+    </div>
 
-</div>
-
-</div>
+  </div>
 
 </header>
 
 <main>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>

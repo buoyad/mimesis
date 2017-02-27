@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // LIBRARY IMPORTS
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { NgSemanticModule } from "ng-semantic/ng-semantic";
 
 // APP IMPORTS
 import { AppComponent } from './app.component';
@@ -79,6 +80,7 @@ export const firebaseAuthConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgSemanticModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
