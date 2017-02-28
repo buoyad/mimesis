@@ -1,19 +1,30 @@
-<h3>{{ username }}</h3>
-<main>
-  <section id="owned">
-    <p>Pools {{ username }} administrates:</p>
-    <ul>
-      <li *ngFor="let pool of owned">
-        <a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a>
-      </li>
-    </ul>
-  </section>
-  <section id="joined">
-    <p>Pools {{ username }} is a member of:</p>
-    <ul>
-      <li *ngFor="let pool of joined">
-        <a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a>
-      </li>
-    </ul>
-  </section>
-</main>
+<div class="ui text grid container">
+  <h1>{{ username }}'s profile</h1>
+  <main>
+    <div class="ui cards">
+      <div class="card">
+        <div class="content">
+          <div class="header">Pools {{ username }} administrates</div>
+        </div>
+        <div class="content">
+          <sm-list>
+            <sm-item *ngFor="let pool of owned"><a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a></sm-item>
+            <sm-item *ngIf="owned.length === 0">None :(</sm-item>
+          </sm-list>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="header">Pools {{ username }} is a member of</div>
+        </div>
+        <div class="content">
+          <sm-list>
+            <sm-item *ngFor="let pool of joined"><a [routerLink]="['/pool', pool.key]">{{ pool.val }}</a></sm-item>
+            <sm-item *ngIf="joined.length === 0">None :(</sm-item>
+          </sm-list>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
