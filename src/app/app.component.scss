@@ -12,11 +12,11 @@ header, main {
   margin: 0 auto;
 }
 
-main {
+ /deep/ main {
   box-sizing: border-box;
   height: 100%;
   background-color: $bg-light;
-  padding: 1px 5px;
+  padding: 20px 5px;
   color: $text-primary;
 
   /deep/ h1, /deep/ h2, /deep/ h3, /deep/ h4, /deep/ h5, /deep/ h6 {
@@ -42,13 +42,6 @@ main {
   color: $text-light;
 }
 
-#header-wrap {
-  width: 70%;
-  margin: 0 auto;
-  @media screen and (max-width: 700px) {
-    width: 100%
-  }
-}
 
 #title {
   float: left;
@@ -87,4 +80,45 @@ main {
   &:hover {
     cursor: pointer;
   }
+}
+
+/deep/ .dropdown.icon {
+  display: none;
+}
+
+/deep/ .ui.top.right.pointing.dropdown /deep/ .menu {
+    margin-right: -.5em;
+    margin-top: .6em;
+}
+
+@media only screen and (max-width: 767px) {
+    .mobile { display: inherit !important; }
+}
+
+@media only screen and (min-width: 768px) and (max-width:991px) {
+    .tablet { display: inherit !important; }
+}
+
+@media only screen and (min-width: 992px) {
+    .computer { display: inherit !important; }
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile { display: none; }
+    .mobile.only { display: none !important; }
+}
+
+@media only screen and (min-width: 992px)  {
+    .tablet { display: none;  }
+    .tablet.only { display: none !important; }
+}
+
+@media only screen and (max-width: 767px) {
+    .tablet { display: none;  }
+    .tablet.only { display: none !important; }
+}
+
+@media only screen and (max-width: 992px) {
+    .computer { display: none;  }
+    .computer.only { display: none !important; }
 }

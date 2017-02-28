@@ -1,17 +1,18 @@
 <div id="signup">
-<h3>Sign up</h3>
+  <h3>Sign up</h3>
 
-<form class="ui mini form" [formGroup]="signupForm">
-  <div class="field">
-    <sm-input label="Username" name="username" [control]="signupForm.controls.username"></sm-input>
-  </div>
-  <div class="field">
-    <sm-input label="Email" type="email" name="email" [control]="signupForm.controls.email"></sm-input>
-  </div>
-  <div class="field">
-    <sm-input label="Password" name="password" [control]="signupForm.controls.password"></sm-input>
-  </div>  
-  <sm-button (click)="test()" icon="privacy" [disabled]="signupForm.invalid" class="positive">Submit</sm-button>
-</form>
+  <form class="ui large form" [formGroup]="signupForm">
+
+    <div class="field">
+    <sm-input icon="user" placeholder="Username" name="username" [control]="signupForm.controls.username"></sm-input>
+    </div>
+    <div class="field">
+    <sm-input type="email" icon="mail" placeholder="Email" name="email" [control]="signupForm.controls.email"></sm-input>
+    </div>
+    <div class="field">
+    <sm-input type="password" icon="privacy" placeholder="Password" name="password" [control]="signupForm.controls.password"></sm-input>
+    </div>
+    <sm-button (click)="test()" icon="book" [disabled]="signupForm.invalid" class="positive fluid">Submit</sm-button>
+  </form>
 
 </div>

@@ -1,11 +1,16 @@
 <div id="login">
-<h3> Login </h3>
+  <h3> Login </h3>
 
-<form (ngSubmit)="login()" #loginForm="ngForm">
-<input [(ngModel)]="userId" name="userId" type="text" placeholder="username"/><br/>
-<input [(ngModel)]="password" name="password" type="password" placeholder="password"/><br/>
-<button type="submit">Log in</button>
-</form>
+  <form class="ui large form" [formGroup]="loginForm">
+
+    <div class="field">
+      <sm-input icon="user" name="userId" class="left" placeholder="Username/Email" [control]="loginForm.controls.userId"></sm-input>
+    </div>
+    <div class="field">
+      <sm-input type="password" icon="privacy" class="left" name="password" placeholder="Password" [control]="loginForm.controls.password"></sm-input>
+    </div>
+    <sm-button (click)="login()" icon="sign in" [disabled]="loginForm.invalid" class="positive fluid">Submit</sm-button>
+
+  </form>
 
 </div>
-

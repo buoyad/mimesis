@@ -11,11 +11,19 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  private username: string;
-  private email: string;
-  private password: string;
+  get username(): string {
+    return this.signupForm.value['username'];
+  }
 
-  private signupForm;
+  get email(): string {
+    return this.signupForm.value['email'];
+  }
+
+  get password(): string {
+    return this.signupForm.value['password'];
+  }
+
+  private signupForm: FormGroup;
   private emailValReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(

@@ -1,2 +1,13 @@
-<app-login></app-login>
-<app-signup></app-signup>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header"><a [routerLink]="['']" class="content">MIMESIS</a></h2>
+    <div class="ui stacked segment">
+      <app-login *ngIf="!viewSignUp"></app-login>
+      <app-signup *ngIf="viewSignUp"></app-signup>
+    </div>
+    <!--<div class="ui message">-->
+      <sm-button icon="sort" *ngIf="!viewSignUp" class="basic inverted fluid left" (click)="viewSignUp=true">Sign Up</sm-button>
+      <sm-button icon="sort" *ngIf="viewSignUp" class="basic inverted fluid left" (click)="viewSignUp=false">Log in</sm-button>
+    <!--</div>-->
+  </div>
+</div>

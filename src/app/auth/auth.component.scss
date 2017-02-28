@@ -1,11 +1,28 @@
-/deep/ div#login {
-  position: relative;
-  width: 200px;
-  float: left;
+.column {
+  max-width: 450px;
 }
 
-/deep/ div#signup {
-  position: relative;
-  width: 200px;
-  float: left;
+.grid {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #30292F;
+}
+
+h2.ui.header {
+  font: normal 7em "Farsan", cursive;
+  font-weight: 400;
+  margin-top:-2em;
+  a {
+    color: #FFE8E9;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+/deep/ body {
+  overflow-y: hidden;
 }
