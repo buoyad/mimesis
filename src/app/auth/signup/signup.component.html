@@ -4,15 +4,18 @@
   <form class="ui large form" [formGroup]="signupForm">
 
     <div class="field">
-    <sm-input icon="user" placeholder="Username" name="username" [control]="signupForm.controls.username"></sm-input>
+      <sm-input class="left" icon="user" placeholder="Username" name="username" [control]="signupForm.controls.username"></sm-input>
     </div>
     <div class="field">
-    <sm-input type="email" icon="mail" placeholder="Email" name="email" [control]="signupForm.controls.email"></sm-input>
+      <sm-input class="left" type="email" icon="mail" placeholder="Email" name="email" [control]="signupForm.controls.email"></sm-input>
     </div>
     <div class="field">
-    <sm-input type="password" icon="privacy" placeholder="Password" name="password" [control]="signupForm.controls.password"></sm-input>
+      <sm-input class="left" type="password" icon="privacy" placeholder="Password" name="password" [control]="signupForm.controls.password"></sm-input>
     </div>
-    <sm-button (click)="test()" icon="book" [disabled]="signupForm.invalid" class="positive fluid">Submit</sm-button>
+    <button class="ui positive fluid button" (click)="signup()" icon="book" [disabled]="signupForm.invalid">
+      <i class="book icon"></i>
+      Login
+    </button>
   </form>
 
 </div>

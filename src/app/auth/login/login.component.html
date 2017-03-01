@@ -9,7 +9,10 @@
     <div class="field">
       <sm-input type="password" icon="privacy" class="left" name="password" placeholder="Password" [control]="loginForm.controls.password"></sm-input>
     </div>
-    <sm-button (click)="login()" icon="sign in" [disabled]="loginForm.invalid" class="positive fluid">Submit</sm-button>
+    <button (click)="login()" [disabled]="loginForm.invalid" class="ui positive fluid button">
+      <i class="sign in icon"></i>
+      Submit
+    </button>
 
   </form>
 

@@ -46,8 +46,4 @@ export class SignupComponent implements OnInit {
     }).catch(e => console.log(e));
   }
 
-  private test() {
-    console.log(this.signupForm);
-  }
-
 }

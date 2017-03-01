@@ -90,35 +90,3 @@ header, main {
     margin-right: -.5em;
     margin-top: .6em;
 }
-
-@media only screen and (max-width: 767px) {
-    .mobile { display: inherit !important; }
-}
-
-@media only screen and (min-width: 768px) and (max-width:991px) {
-    .tablet { display: inherit !important; }
-}
-
-@media only screen and (min-width: 992px) {
-    .computer { display: inherit !important; }
-}
-
-@media only screen and (min-width: 768px) {
-    .mobile { display: none; }
-    .mobile.only { display: none !important; }
-}
-
-@media only screen and (min-width: 992px)  {
-    .tablet { display: none;  }
-    .tablet.only { display: none !important; }
-}
-
-@media only screen and (max-width: 767px) {
-    .tablet { display: none;  }
-    .tablet.only { display: none !important; }
-}
-
-@media only screen and (max-width: 992px) {
-    .computer { display: none;  }
-    .computer.only { display: none !important; }
-}

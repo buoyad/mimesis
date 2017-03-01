@@ -4,7 +4,7 @@
     <div class="ui stacked segment">
       <app-login *ngIf="!viewSignUp"></app-login>
       <app-signup *ngIf="viewSignUp"></app-signup>
-    </div>
+    </div><br/>
     <!--<div class="ui message">-->
       <sm-button icon="sort" *ngIf="!viewSignUp" class="basic inverted fluid left" (click)="viewSignUp=true">Sign Up</sm-button>
       <sm-button icon="sort" *ngIf="viewSignUp" class="basic inverted fluid left" (click)="viewSignUp=false">Log in</sm-button>

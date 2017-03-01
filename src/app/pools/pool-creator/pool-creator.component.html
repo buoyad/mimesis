@@ -1,38 +1,67 @@
-<h3>Create a new Pool!</h3>
+<div class="ui container">
+  <div class="ui raised segment very padded centered container">
 
-<form (ngSubmit)="onSubmit()" #poolForm="ngForm">
-<input type="text" 
-        [(ngModel)]="pool.name"
-        name="name" 
-        placeholder="Name your pool" 
-        required/>*<br/>
-<input type="text"
-        placeholder="Add users"
-        *autocompleteConfig="{
+    <div class="ui centered grid">
+      <div class="eight wide computer twelve wide tablet sixteen wide phone column">
+        <form class="ui large form" style="width: 100%;" [formGroup]="createForm">
+          <div class="field">
+            <sm-input icon="tags" type="text" placeholder="Title" class="left" [control]="createForm.controls.title"></sm-input>
+          </div>
+          <div class="field">
+            <div class="ui search left icon input">
+              <input class="prompt" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" type="text" placeholder="Search for users..."
+              />
+              <i class="add user icon"></i>
+            </div>
+          </div>
+          <div smDeviceVisibility="mobile only" class="sixteen wide column">
+            <div class="ui segment">
+              <div class="ui header">Members</div>
+              <sm-list>
+                <sm-item *ngFor="let user of pool.members">{{user}}</sm-item>
+              </sm-list>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div smDeviceVisibility="tablet computer">
+        <div class="ui segment four wide column">
+          <div class="ui header">Members</div>
+          <sm-list>
+            <sm-item *ngFor="let user of pool.members">{{user}}</sm-item>
+          </sm-list>
+        </div>
+      </div>
+    </div>
+
+    <!--<form (ngSubmit)="onSubmit()" #poolForm="ngForm">
+      <sm-input type="text" [(model)]="pool.name" name="name" label="Name" placeholder="Name your pool" required></sm-input>
+      <input type="text" placeholder="Add users" *autocompleteConfig="{
           asyncData: usernames
-        }"
-        (keydown)="addUser($event)"
-        [(ngModel)]="user"
-        name="user"/><br/>
-<ul>
-  <li *ngFor="let m of pool.members">{{m}}</li>
-</ul>
+        }" (keydown)="addUser($event)" [(ngModel)]="user" name="user" /><br/>
+      <ul>
+        <li *ngFor="let m of pool.members">{{m}}</li>
+      </ul>
 
-<h3>Book Info</h3>
-<input type="text" placeholder="Title" [(ngModel)]="pool.book.title" name="title" required/>*<br/>
-<input type="text" placeholder="Author" [(ngModel)]="pool.book.author" name="author"/><br/>
-<input type="number" placeholder="# of pages" [(ngModel)]="pool.book.pages" name="pages" required/>*<br/>
+      <h3>Book Info</h3>
+      <input type="text" placeholder="Title" [(ngModel)]="pool.book.title" name="title" required/>*<br/>
+      <input type="text" placeholder="Author" [(ngModel)]="pool.book.author" name="author" /><br/>
+      <input type="number" placeholder="# of pages" [(ngModel)]="pool.book.pages" name="pages" required/>*<br/>
 
-<h3>Schedule</h3>
-<table>
-  <tr><td><button type="button" (click)="addStone()">+</button></td><td></td><td></td></tr>
-  <tr *ngFor="let stone of pool.schedule.stones; let i = index">
-    <td><input type="text" placeholder="Heading" [(ngModel)]="pool.schedule.stones[i].heading" name="heading{{i}}" required/></td>
-    <td><input type="date" [(ngModel)]="pool.schedule.stones[i].date" name="date{{i}}" required/></td>
-    <td><input type="number" placeholder="Target page" [(ngModel)]="pool.schedule.stones[i].page" name="page{{i}}" required/></td>
-  </tr>
-</table>
-<button type="submit" [disabled]="!poolForm.form.valid">Submit</button>
-</form>
-  
-
+      <h3>Schedule</h3>
+      <table>
+        <tr>
+          <td><button type="button" (click)="addStone()">+</button></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let stone of pool.schedule.stones; let i = index">
+          <td><input type="text" placeholder="Heading" [(ngModel)]="pool.schedule.stones[i].heading" name="heading{{i}}" required/></td>
+          <td><input type="date" [(ngModel)]="pool.schedule.stones[i].date" name="date{{i}}" required/></td>
+          <td><input type="number" placeholder="Target page" [(ngModel)]="pool.schedule.stones[i].page" name="page{{i}}" required/></td>
+        </tr>
+      </table>
+      <button type="submit" [disabled]="!poolForm.form.valid">Submit</button>
+    </form>-->
+  </div>
+</div>
