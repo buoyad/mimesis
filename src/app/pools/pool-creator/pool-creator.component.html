@@ -9,8 +9,7 @@
           </div>
           <div class="field">
             <div class="ui search left icon input">
-              <input class="prompt" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" type="text" placeholder="Search for users..."
-              />
+              <input class="prompt" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" type="text" placeholder="{{ searchPrompt }}"/>
               <i class="add user icon"></i>
             </div>
           </div>
@@ -22,6 +21,19 @@
               </sm-list>
             </div>
           </div>
+
+          <!-- Book info -->
+          <h4 class="ui dividing header">Book info</h4>
+          <div class="two fields">
+            <div class="field">
+              <sm-input icon="book" class="left" placeholder="Title" [control]="createForm.controls.book.controls.title"></sm-input>
+            </div>
+            <div class="field">
+              <sm-input icon="font" class="left" placeholder="Author" [control]="createForm.controls.book.controls.author"></sm-input>
+            </div>
+          </div>
+
+
         </form>
       </div>
       <div smDeviceVisibility="tablet computer">

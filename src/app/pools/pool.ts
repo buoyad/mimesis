@@ -14,10 +14,17 @@ export class Pool {
     this.book = new Book();
   }
 
-  public addMember(u: string) {
+  /**
+   * Adds a normal member to this pool.
+   * @param u the username of the user to add
+   * @returns true if the user was added, false if the user already exists
+   */
+  public addMember(u: string): boolean {
     if (this.members.indexOf(u) == -1) {
       this.members.push(u);
+      return true;
     }
+    return false;
   }
 }
 

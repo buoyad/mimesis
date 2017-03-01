@@ -17,10 +17,14 @@ declare var $: any;
 export class PoolCreatorComponent implements OnInit {
   private owner: any = {};
   private pool: Pool = new Pool();
-  private usernames;
+  private usernames: Array<{ 'title': string }>;
+  private usernamePool: Array<{ 'title': string }>;
   private user: string = "";
 
   private createForm: FormGroup;
+
+  /* UI message bindings */
+  private searchPrompt: string = "Add users..."
 
   constructor(
     private as: AuthService,
@@ -31,8 +35,14 @@ export class PoolCreatorComponent implements OnInit {
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({
-      title: ['', Validators.required]
+      title: ['', Validators.required],
+      book: this.formBuilder.group({
+        title: ['', [Validators.required]],
+        author: '',
+        pages: [0, Validators.required]
+      })
     });
+    console.log(this.createForm)
 
     this.as.getSignedInUser().first().subscribe(u => {
       this.owner = u;
@@ -43,6 +53,7 @@ export class PoolCreatorComponent implements OnInit {
       this.usernames = names.map(name => {
         return { 'title': name }
       });
+      this.usernamePool = this.usernames;
       this.initSearch();
     });
   }
@@ -50,8 +61,11 @@ export class PoolCreatorComponent implements OnInit {
   private initSearch(): void {
     $('.ui.search')
       .search({
-        source: this.usernames,
-        onSelect: ()  => this.addUser()
+        source: this.usernamePool,
+        onSelect: (result, response)  => {
+          this.user = result.title;
+          this.addUser();
+        }
       });
   }
 
@@ -62,10 +76,18 @@ export class PoolCreatorComponent implements OnInit {
   private addUser() {
     this.as.userExists(this.user).then(r => {
       if (r) {
-        this.pool.addMember(this.user);
+        if (!this.pool.addMember(this.user)) {
+          this.searchPrompt = "User already added!";
+          setTimeout(() => {
+            this.searchPrompt = "Add users...";
+          }, 10000)
+        } else {
+          this.searchPrompt = "Add users...";
+        }
         this.user = "";
       }
     });
+
     return false;
   }
 
