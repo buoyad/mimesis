@@ -39,17 +39,19 @@
 
           <!-- Schedule -->
           <h4 class="ui dividing header">Schedule &amp; Milestones</h4>
-          <div class="three fields" *ngFor="let stone of createForm.controls.schedule.controls; let i = index">
+          <template ngFor let-stone [ngForOf]="createForm.controls.schedule.controls" let-i="index">
+          <div class="field">
+            <sm-input icon="header" class="left" placeholder="Heading" type="text" [control]="createForm.controls.schedule.controls[i].controls.heading"></sm-input>
+          </div>
+          <div class="two fields">
             <div class="field">
               <sm-input icon="sticky note" class="left" placeholder="Target #" type="number" [control]="createForm.controls.schedule.controls[i].controls.page"></sm-input>
             </div>
             <div class="field">
               <sm-input icon="calendar" class="left" placeholder="Date" type="date" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
             </div>
-            <div class="field">
-              <sm-input icon="calendar" class="left" placeholder="Date" type="date" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
-            </div>
           </div>
+          </template>
 
 
         </form>
