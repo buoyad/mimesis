@@ -39,8 +39,11 @@ export class PoolCreatorComponent implements OnInit {
       book: this.formBuilder.group({
         title: ['', [Validators.required]],
         author: '',
-        pages: [0, Validators.required]
-      })
+        pages: [null, Validators.required]
+      }),
+      schedule: this.formBuilder.array([
+        this.initSchedule()
+      ])
     });
     console.log(this.createForm)
 
@@ -56,6 +59,14 @@ export class PoolCreatorComponent implements OnInit {
       this.usernamePool = this.usernames;
       this.initSearch();
     });
+  }
+
+  private initSchedule(): FormGroup {
+    return this.formBuilder.group({
+          heading: '',
+          date: ['', Validators.required],
+          page: [null, Validators.required]
+        })
   }
 
   private initSearch(): void {
@@ -94,6 +105,11 @@ export class PoolCreatorComponent implements OnInit {
   private onSubmit(): void {
     let newId: string = this.ps.storePool(this.pool);
     this.router.navigate(['/pool', newId]);
+  }
+
+  private test(i: HTMLInputElement): void {
+    console.log(i);
+    console.log(i instanceof HTMLInputElement)
   }
 
 }

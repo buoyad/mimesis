@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
@@ -9,13 +9,20 @@ import { SignupComponent } from './signup/signup.component';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
 
-  private viewSignUpp: boolean = false;
+  private viewSignUp: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+    let body = document.getElementsByTagName('body')[0];
+    body.style.overflowY = 'hidden';
+  }
+
+  ngOnDestroy() {
+    let body = document.getElementsByTagName('body')[0];
+    body.style.overflowY = 'auto';
   }
 
 }

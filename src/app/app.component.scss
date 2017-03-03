@@ -20,7 +20,7 @@ header, main {
   color: $text-primary;
 
   /deep/ h1, /deep/ h2, /deep/ h3, /deep/ h4, /deep/ h5, /deep/ h6 {
-    font-family: $font-heading;
+    font-family: $font-heading !important;
   }
 
   /deep/ p, /deep/ li {

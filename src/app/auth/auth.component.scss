@@ -12,7 +12,7 @@
 }
 
 h2.ui.header {
-  font: normal 7em "Farsan", cursive;
+  font: normal 7em "Farsan", cursive !important;
   font-weight: 400;
   margin-top:-2em;
   a {
@@ -21,8 +21,4 @@ h2.ui.header {
       text-decoration: none;
     }
   }
-}
-
-/deep/ body {
-  overflow-y: hidden;
 }

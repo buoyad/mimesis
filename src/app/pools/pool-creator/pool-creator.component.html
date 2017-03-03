@@ -4,6 +4,7 @@
     <div class="ui centered grid">
       <div class="eight wide computer twelve wide tablet sixteen wide phone column">
         <form class="ui large form" style="width: 100%;" [formGroup]="createForm">
+          <h2 class="ui dividing header">New Pool</h2>
           <div class="field">
             <sm-input icon="tags" type="text" placeholder="Title" class="left" [control]="createForm.controls.title"></sm-input>
           </div>
@@ -24,12 +25,29 @@
 
           <!-- Book info -->
           <h4 class="ui dividing header">Book info</h4>
-          <div class="two fields">
+          <div class="three fields" formGroupName="book">
             <div class="field">
               <sm-input icon="book" class="left" placeholder="Title" [control]="createForm.controls.book.controls.title"></sm-input>
             </div>
             <div class="field">
               <sm-input icon="font" class="left" placeholder="Author" [control]="createForm.controls.book.controls.author"></sm-input>
+            </div>
+            <div class="field">
+              <sm-input icon="hashtag" class="left" placeholder="Pages" type="number" [control]="createForm.controls.book.controls.pages"></sm-input>
+            </div>
+          </div>
+
+          <!-- Schedule -->
+          <h4 class="ui dividing header">Schedule &amp; Milestones</h4>
+          <div class="three fields" *ngFor="let stone of createForm.controls.schedule.controls; let i = index">
+            <div class="field">
+              <sm-input icon="sticky note" class="left" placeholder="Target #" type="number" [control]="createForm.controls.schedule.controls[i].controls.page"></sm-input>
+            </div>
+            <div class="field">
+              <sm-input icon="calendar" class="left" placeholder="Date" type="date" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
+            </div>
+            <div class="field">
+              <sm-input icon="calendar" class="left" placeholder="Date" type="date" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
             </div>
           </div>
 
