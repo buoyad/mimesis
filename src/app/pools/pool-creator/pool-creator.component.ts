@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { AuthService } from '../../auth/auth.service';
 import { PoolService } from '../pool.service';
@@ -81,7 +81,8 @@ export class PoolCreatorComponent implements OnInit {
   }
 
   private addStone(): void {
-    this.pool.schedule.stones.push(new Stone());
+    const schedule = <FormArray>this.createForm.controls['schedule'];
+    schedule.push(this.initSchedule());
   }
 
   private addUser() {
@@ -103,6 +104,19 @@ export class PoolCreatorComponent implements OnInit {
   }
 
   private onSubmit(): void {
+    let holder = this.createForm.value;
+    let startDate = holder.schedule[0].date;
+    let endDate = holder.schedule[holder.schedule.length - 1].date;
+    let sched: Schedule = {
+      startDate: startDate,
+      endDate: endDate,
+      stones: holder.schedule
+    };
+    holder.schedule = sched;
+    let mem = this.pool.members;
+    this.pool = holder;
+    this.pool.members = mem;
+    this.pool.admins = this.owner.username;
     let newId: string = this.ps.storePool(this.pool);
     this.router.navigate(['/pool', newId]);
   }

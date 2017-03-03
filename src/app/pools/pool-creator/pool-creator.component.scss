@@ -6,3 +6,38 @@
     opacity: 1;
   }
 }
+
+.ui.very-padded {
+  padding: 3em;
+  @media screen and (max-width: 768px) {
+    padding: 1em;
+  }
+}
+
+#readBy {
+  margin-top: .7em;
+  font-weight: bold;
+  @media screen and (max-width: 768px) {
+    margin: -.6em auto .5em;
+    .icon.mobile {
+      display: inline-block !important;
+    }
+  }
+}
+
+h6.ui.dividing.header {
+  margin-top: 0;
+}
+
+#memberList {
+  margin-top: 8.4em;
+}
+
+/deep/ .calendarInput /deep/ input {
+  height: 43px;
+}
+
+#submitDiv {
+  border: none;
+  border-top: 1px solid rgba(34,36,38,.5);
+}
