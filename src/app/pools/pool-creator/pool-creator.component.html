@@ -2,81 +2,94 @@
   <div class="ui raised segment very-padded centered container">
 
     <div class="ui centered grid">
-      <div class="eight wide computer twelve wide tablet sixteen wide phone column">
+      <div class="sixteen wide column">
         <form class="ui large form" style="width: 100%;" [formGroup]="createForm">
           <h2 class="ui dividing header">New Pool</h2>
-          <div class="field">
-            <sm-input icon="tags" type="text" placeholder="Title" class="left" [control]="createForm.controls.title"></sm-input>
-          </div>
-          <div class="field">
-            <div class="ui search left icon input">
-              <input class="prompt" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" type="text" placeholder="{{ searchPrompt }}"
-              />
-              <i class="add user icon"></i>
+
+          <!-- Basic info -->
+          <div *ngIf="formView == 'basics'">
+            <div class="two fields">
+              <div class="field">
+                <sm-input icon="tags" type="text" placeholder="Title" class="left" [control]="createForm.controls.title"></sm-input>
+              </div>
+              <div class="field">
+                <div class="ui search left icon input">
+                  <input class="prompt" [(ngModel)]="user" [ngModelOptions]="{standalone: true}" type="text" placeholder="{{ searchPrompt }}"
+                  />
+                  <i class="add user icon"></i>
+                </div>
+              </div>
             </div>
-          </div>
-          <div smDeviceVisibility="mobile only" class="sixteen wide column">
-            <div class="ui segment">
-              <div class="ui header">Members</div>
-              <sm-list>
-                <sm-item *ngFor="let user of pool.members">{{user}}</sm-item>
-              </sm-list>
+            <div class="sixteen wide column">
+              <div class="ui segment">
+                <div class="ui header">Members</div>
+                <sm-list>
+                  <sm-item *ngFor="let user of pool.members">{{user}}</sm-item>
+                </sm-list>
+              </div>
+            </div>
+            <div class="eight wide column">
+              <button type="button" class="ui basic fluid button" (click)="formView = 'book'">
+                Next
+                <i class="arrow right icon"></i>
+              </button>
             </div>
           </div>
 
           <!-- Book info -->
-          <h4 class="ui dividing header">Book info</h4>
-          <div class="three fields" formGroupName="book">
-            <div class="field">
-              <sm-input icon="book" class="left" placeholder="Title" autocapitalize="words" [control]="createForm.controls.book.controls.title"></sm-input>
+          <div *ngIf="formView == 'book'">
+            <h4 class="ui dividing header">Book info</h4>
+            <div class="three fields" formGroupName="book">
+              <div class="field">
+                <sm-input icon="book" class="left" placeholder="Title" autocapitalize="words" [control]="createForm.controls.book.controls.title"></sm-input>
+              </div>
+              <div class="field">
+                <sm-input icon="font" class="left" placeholder="Author" autocapitalize="words" [control]="createForm.controls.book.controls.author"></sm-input>
+              </div>
+              <div class="field">
+                <sm-input icon="hashtag" class="left" placeholder="Pages" type="number" [control]="createForm.controls.book.controls.pages"></sm-input>
+              </div>
             </div>
-            <div class="field">
-              <sm-input icon="font" class="left" placeholder="Author" autocapitalize="words" [control]="createForm.controls.book.controls.author"></sm-input>
-            </div>
-            <div class="field">
-              <sm-input icon="hashtag" class="left" placeholder="Pages" type="number" [control]="createForm.controls.book.controls.pages"></sm-input>
-            </div>
+            <button type="button" class="ui basic button" (click)="formView = 'basics'">
+              <i class="arrow left icon"></i>
+              Previous
+            </button>
+            <button type="button" class="ui basic button" (click)="formView = 'schedule'">
+              Next
+              <i class="arrow right icon"></i>
+            </button>
           </div>
 
           <!-- Schedule -->
-          <h4 class="ui dividing header">Schedule &amp; Milestones</h4>
-          <template ngFor let-stone [ngForOf]="createForm.controls.schedule.controls" let-i="index">
-            <h6 class="ui dividing header">Milestone {{ i + 1 }}</h6>
-            <div class="field">
-              <sm-input icon="header" class="left" placeholder="Heading" type="text" [control]="createForm.controls.schedule.controls[i].controls.heading"></sm-input>
-            </div>
-            <div class="two fields">
+          <div *ngIf="formView == 'schedule'">
+            <h4 class="ui dividing header">Schedule &amp; Milestones</h4>
+            <template ngFor let-stone [ngForOf]="createForm.controls.schedule.controls" let-i="index">
+              <h6 class="ui dividing header">Milestone {{ i + 1 }}</h6>
               <div class="field">
-                <sm-input icon="sticky note" class="left" placeholder="Target page #" type="number" [control]="createForm.controls.schedule.controls[i].controls.page"></sm-input>
+                <sm-input icon="header" class="left" placeholder="Heading" type="text" [control]="createForm.controls.schedule.controls[i].controls.heading"></sm-input>
               </div>
-              <span id="readBy"><i class="arrow up icon mobile only"></i> by <i class="arrow down icon mobile only"></i></span>
-              <div class="field">
-                <sm-input icon="calendar" class="left" placeholder="Date" type="date" class="calendarInput" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
+              <div class="two fields">
+                <div class="field">
+                  <sm-input icon="sticky note" class="left" placeholder="Target page #" type="number" [control]="createForm.controls.schedule.controls[i].controls.page"></sm-input>
+                </div>
+                <span id="readBy"><i class="arrow up icon mobile only"></i> by <i class="arrow down icon mobile only"></i></span>
+                <div class="field">
+                  <sm-input icon="calendar" class="left" placeholder="Date" type="date" class="calendarInput" [control]="createForm.controls.schedule.controls[i].controls.date"></sm-input>
+                </div>
               </div>
-            </div>
-          </template>
-          <button type="button" class="ui basic fluid button" (click)="addStone()">
+            </template>
+            <button type="button" class="ui basic fluid button" (click)="addStone()">
             <i class="add to calendar icon"></i>
             Add Milestone
           </button>
-          <hr id="submitDiv"/>
-          <button [disabled]="createForm.invalid" type="button" class="ui positive fluid button" (click)="onSubmit()">
+            <hr id="submitDiv" />
+            <button [disabled]="createForm.invalid" type="button" class="ui positive fluid button" (click)="onSubmit()">
             <i class="save icon"></i>
             Save!
           </button>
-
+          </div>
 
         </form>
-      </div>
-      <div smDeviceVisibility="tablet computer">
-        <div class="four wide column" id="memberList">
-          <div class="ui segment">
-            <div class="ui header">Members</div>
-            <sm-list>
-              <sm-item *ngFor="let user of pool.members">{{user}}</sm-item>
-            </sm-list>
-          </div>
-        </div>
       </div>
     </div>
 

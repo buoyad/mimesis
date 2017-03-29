@@ -22,6 +22,7 @@ export class PoolCreatorComponent implements OnInit {
   private user: string = "";
 
   private createForm: FormGroup;
+  private formView: string = "basics";
 
   /* UI message bindings */
   private searchPrompt: string = "Add users..."
@@ -116,7 +117,7 @@ export class PoolCreatorComponent implements OnInit {
     let mem = this.pool.members;
     this.pool = holder;
     this.pool.members = mem;
-    this.pool.admins = this.owner.username;
+    this.pool.admins = [this.owner.username];
     let newId: string = this.ps.storePool(this.pool);
     this.router.navigate(['/pool', newId]);
   }
